@@ -6,3 +6,8 @@ git push -u origin main
 # Me ha dado error "no encuentro main"
 # Intento hacerlo desde la utilidad gráfica
 Ha funcionado hacer el commit desde la utilidad gráfica y el commit desde consola
+
+# Sigo el vídeo
+Hago commit de pyproject.toml e __init.py__ de modeltools
+Hago commit indicando "Estructura Básica"
+
