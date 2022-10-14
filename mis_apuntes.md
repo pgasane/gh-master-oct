@@ -358,4 +358,5 @@ tests/test_preprocessing.py::test_get_numerical_features_complex PASSED         
 - La forma ortodoxa de ejecutar los test es: poetry run pytest
 - Los test necesitan PANDAS. Por tanto, creamos la dependencia en el proyecto ejecutando desde consola "poetry add -D pandas"
 - Nota: para eliminar dependencias de poetry: "poetry remove pandas"
-- 
+- Un BUILD no debe hacerse si NO se supera el TESTING. Esto se debe codificar en el build.yml
+- Para asegurar la ejecución del TESTING, en este punto, DEBEMOS DE HACER UNA NUEVA RELEASE
