@@ -1,3 +1,4 @@
+# Ignoramos lo que contengan las rutas indicadas
 dist/*
 
 # Byte-compiled / optimized / DLL files

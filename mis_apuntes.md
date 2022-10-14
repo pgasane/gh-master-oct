@@ -13,6 +13,7 @@ git checkout id-rama # moverte de una rama a otra
 git checkout codigo-commit # moverte de un commit a otro
 git reset --hard HEAD # BORRAR todo hasta el último commit subido. Para volver al último punto confirmado
 git clean -f -d # Limpiar lo que no está incluido en un commit
+Más info sobre gestión de ramas: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Gesti%C3%B3n-de-Ramas#r_branch_management
 
 # TERMINAL TUTORIA
 source /opt/conda/bin/activate
@@ -249,5 +250,18 @@ on:               # Se ejecuta...
 # Con el código anterior conseguimos que solo se ejecute el paso BUILDING cuando se ha definido una ETIQUETA ANOTADA con el formato "v*.*.*"
 
 # Creo una nueva Release v0.2.5 porque había un fallo en el build (el punto dichoso al final) que ha impedido que se crearan los binarios
+- El proceso a terminado correctamente.
+
+# ERROR DE ARRASTRE DE VERSIONES COPIADAS DESDE LA RUTA /DIST/*
+- Dentro del git solo debe haber código
+- Si existen, se deben borrar
+- Desde consola: git rm dist/*. # en el próximo commit se eliminan del repositorio (ojo, no de cada RELEASE)
+- Desde interfaz git: botón derecho, eliminar definitivamente
+- Forma Correcta:
+    - Se crea el archivo .gitignore y se indica la ruta que queremos ignorar (en nuestro caso dist/*)
+    - La comunidad ha creado .gitignore para infinidad de entornos que están disponibles aquí: github.com/github/gitignore
+    - Buscamos el .gitignore para Python y lo copiamos
 
 
+
+# INICIAMOS EL PREPROCESADO 
