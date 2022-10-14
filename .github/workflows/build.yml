@@ -28,4 +28,4 @@ jobs:             # "A JOB is a series of STEPS that constitute a process, usual
       - name: Publish to GH Releases. # Paso para publicar los binarios generados con el comendo "poetry build" en GitHub
         uses: softprops/action-gh-release@v1
         with: # Con "with" se indican los valores de los parámetros que tiene el ACTION de GitHub que estamos usando
-          files: ${{ github.workspace }}/dist/*. # Para ver que la carpeta dist se crea al ejecutar poetry build desde la ruta del workspace ( ${{ github.workspace }} )
+          files: ${{ github.workspace }}/dist/* # Para ver que la carpeta dist se crea al ejecutar poetry build desde la ruta del workspace ( ${{ github.workspace }} )
