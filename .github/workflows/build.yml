@@ -2,7 +2,7 @@ name: Building    # Nombre del workflow "Workflows define the jobs and steps tha
 on:               # Se ejecuta...
   push:           # cada vez que hago un PUSH...
     tags:         # con una etiqueta que empieza por "v"
-      - "v*.*.*"  # Este on solo se ejecuta cuando hay etiqueta
+      - "v*.*.*"  # Este on solo se ejecuta cuando hay etiqueta CON EL FORMATO "v*.*.*"
 
 jobs:             # "A JOB is a series of STEPS that constitute a process, usually a BUILD. Job steps are processed one at a time in the order you specify."
   building:

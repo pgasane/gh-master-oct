@@ -232,4 +232,13 @@ To github.com:pgasane/gh-master-oct.git
 # Ejercicio: creamos la versión v0.2.3
 - Modificamos el pyproject.toml para añadir la nueva versión (version = "v0.2.3")
 - Hacemos el commit de todo el código implicado en la nueva versión v0.2.3
+    - Se hace el commit desde la utilidad del Visual Code
+    - Se añade pyproject.toml y mis_apuntes.md
+- Creamos la nueva etiqueta anotada:
+    - git tag -a v0.2.3 -m "v0.2.3"
+    - git tag  # comprobación
+    - git log  # comprobación de commits realizados
+- git push --follow-tags
+
+# HACEMOS UN COMMIT QUE NO GENERE UNA RELEASE
 - 
