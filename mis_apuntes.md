@@ -241,4 +241,11 @@ To github.com:pgasane/gh-master-oct.git
 - git push --follow-tags
 
 # HACEMOS UN COMMIT QUE NO GENERE UNA RELEASE
-- 
+name: Building    # Nombre del workflow "Workflows define the jobs and steps that constitute build processes." (https://www.ibm.com/docs/en/urbancode-build/6.1.0?topic=creating-jobs-workflows)
+on:               # Se ejecuta...
+  push:           # cada vez que hago un PUSH...
+    tags:         # con una etiqueta que empieza por "v"
+      - "v*.*.*"  # Este on solo se ejecuta cuando hay etiqueta CON EL FORMATO "v*.*.*"
+# Con el código anterior conseguimos que solo se ejecute el paso BUILDING cuando se ha definido una ETIQUETA ANOTADA con el formato "v*.*.*"
+
+# Creo una nueva Release v0.2.4 porque había un fallo en el build (el punto dichoso al final) que ha impedido que se crearan los binarios
