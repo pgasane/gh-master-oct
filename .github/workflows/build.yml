@@ -1,20 +1,18 @@
-name: Building # Nombre del workflow
-on:
-  push:
-    tags:
-      - "v*.*.*" # Este on solo se ejecuta cuando hay etiqueta
+name: Building    # Nombre del workflow "Workflows define the jobs and steps that constitute build processes." (https://www.ibm.com/docs/en/urbancode-build/6.1.0?topic=creating-jobs-workflows)
+on:               # Se ejecuta...
+  push:           # cada vez que hago un PUSH...
+    tags:         # con una etiqueta que empieza por "v"
+      - "v*.*.*"  # Este on solo se ejecuta cuando hay etiqueta
 
-jobs: # Solo vamos a crear uno
+jobs:             # "A JOB is a series of STEPS that constitute a process, usually a BUILD. Job steps are processed one at a time in the order you specify."
   building:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest        # Entorno de ejecución (siempre ubuntu-lastest)
     steps:
-      - uses: actions/checkout@v3 # Copiamos el repositorio
+      - uses: actions/checkout@v3 # Descargamos el repositorio
 
-      - uses: actions/setup-python@v4 # Se instala python v4
+      - uses: actions/setup-python@v4 # Se instala python v4 (es la 3 ó superior)
         with:
           python-version: '3.10'
-
-# TENDRÍA QUE MODIFICAR EL BUILD.YML... ESPERO LA TUTORÍA
 
       - name: Install Poetry 
         uses: snok/install-poetry@v1
@@ -27,7 +25,7 @@ jobs: # Solo vamos a crear uno
 
       - run: poetry build # Ejecuto un comando de consola en el repo.
 
-      - name: Publish to GH Releases
+      - name: Publish to GH Releases. # Paso para publicar los binarios generados con el comendo "poetry build" en GitHub
         uses: softprops/action-gh-release@v1
-        with:
-          files: ${{ github.workspace }}/dist/*
+        with: # Con "with" se indican los valores de los parámetros que tiene el ACTION de GitHub que estamos usando
+          files: ${{ github.workspace }}/dist/*. # Para ver que la carpeta dist se crea al ejecutar poetry build desde la ruta del workspace ( ${{ github.workspace }} )
