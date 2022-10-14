@@ -2,8 +2,7 @@ import pandas as pd
 from modeltools.preprocessing import get_numerical_features
 
 def test_get_numerical_features_simple():
-    """En este vamos a probar que logra distinguir
-    entre cadenas de texto y número enteros"""
+    """En este vamos a probar que logra distinguir entre cadenas de texto y número enteros"""
 
     df = pd.DataFrame({
       "numerica": [5],
@@ -12,6 +11,10 @@ def test_get_numerical_features_simple():
 
     # assert es "como un if" pero que falla si la condición
     # es falsa. Esto es ideal para los tests.
+    # assert 1 == 1 nunca falla porque no será muy útil ya que nos interesa que si algo va mal falle
+    # El escribir test obliga al programador a darse cuenta del código y de la lógica que se sigue en el código
+    # Lo que se trata es forzar el código para detectar los fallos y corregirlos antes de pasarlo a producción
+    # Se recomienda usar la libreria pytest
 
     assert get_numerical_features(df) == ["numerica"]
 
@@ -56,6 +59,7 @@ def test_get_numerical_features_columns_withoutname():
     """Este test comprueba que funciona correctamente
     cuando hay columnas numéricas sin nombre (columnas
     con numeros/posiciones)"""
+    
     df = pd.DataFrame([
         [1, "a"]
     ])

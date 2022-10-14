@@ -262,6 +262,100 @@ on:               # Se ejecuta...
     - La comunidad ha creado .gitignore para infinidad de entornos que están disponibles aquí: github.com/github/gitignore
     - Buscamos el .gitignore para Python y lo copiamos
 
+# USAR LOS PAQUETES DE DISTRIBUCIÓN PARA INSTALAR EL MODELO
+- https://github.com/pgasane/gh-master-oct/releases/download/v0.2.5/modeltools-0.2.5-py3-none-any.whl
+- La URL anterior se puede incluir como dependencia de nuestro proyecto para que se pueda instalar al pulsar sobre el mismo
+- Sin embargo, este método es muy débil porque con un mínimo fallo hace que el paquete quede inservible
 
+# GENERAR TESTING PARA LOS PROYECTOS
+- Los TESTs se ponen en la carpeta TEST
+- Los TESTs se usan para comprobar que el código hace lo que tiene que hacer
+- Creamos un nuevo aricho de test dentro del directorio TEST
+- Los TESTS deben estar fuera de la carpeta del proyecto (modeltools)
+- Los TESTS solo se ejecutan en el BUILDING
+- Creamos el archivo __init__.py dentro de la carpeta TESTS
+- Por cada fichero en la carpeta del proyecto (modeltools) creamos un fichero en la carpeta TEST con el formato test_nombreDelModulo.py
+- En nuestro caso: test_preprocessing.py porque en modeltools tenemos preprocessing.py
 
-# INICIAMOS EL PREPROCESADO 
+# assert es "como un if" pero que falla si la condición es falsa. Esto es ideal para los tests.
+- assert 1 == 1 nunca falla porque no será muy útil ya que nos interesa que si algo va mal falle
+- El escribir test obliga al programador a darse cuenta del código y de la lógica que se sigue en el código
+- Lo que se trata es forzar el código para detectar los fallos y corregirlos antes de pasarlo a producción
+- Se recomienda usar la libreria pytest que solo se usará durante el building. Una vez creado el paquete binario, ya no es necesario.
+- Instalamos pytest:
+    - Definimos la dependencia desde consola: poetry add -D pytest
+    - En DOCKER usamos el MAMBA para instalar PYTEST: mamba install pytest
+    - Sin DOCKER usamos CONDA para instalar PYTEST: conda install -c conda-forge pytest
+- PYTEST busca los test a probar y los ejecuta:
+    - Muestra el número que encuentra
+    - Muestra el resultado de ejecutar todos los test
+    - Nota: cuando el error es "not defined" es que no la hemos importado o hemos cometido un error sintáctico
+
+# EJEMPLO DE SALIDA FALLIDA DE LA EJECUCIÓN DE PYTEST
+(base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ pytest
+========================================================================================== test session starts ==========================================================================================
+platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0
+rootdir: /home/jovyan/work/m02/gh-master-oct
+plugins: anyio-3.6.1
+collected 7 items                                                                                                                                                                                       
+
+tests/test_preprocessing.py F......                                                                                                                                                               [100%]
+
+=============================================================================================== FAILURES ================================================================================================
+__________________________________________________________________________________ test_get_numerical_features_simple ___________________________________________________________________________________
+
+    def test_get_numerical_features_simple():
+        """En este vamos a probar que logra distinguir entre cadenas de texto y número enteros"""
+    
+        df = pd.DataFrame({
+          "numerica": [5],
+          "categorica": ["rojo"]
+        })
+    
+        # assert es "como un if" pero que falla si la condición
+        # es falsa. Esto es ideal para los tests.
+        # assert 1 == 1 nunca falla porque no será muy útil ya que nos interesa que si algo va mal falle
+        # El escribir test obliga al programador a darse cuenta del código y de la lógica que se sigue en el código
+        # Lo que se trata es forzar el código para detectar los fallos y corregirlos antes de pasarlo a producción
+        # Se recomienda usar la libreria pytest
+    
+        # assert get_numerical_features(df) == ["numerica"]
+>       assert 1 == 2
+E       assert 1 == 2
+
+# EJEMPLO DE SALIDA CORRECTA DE LA EJECUCIÓN DE PYTEST
+(base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ pytest -v
+========================================================================================== test session starts ==========================================================================================
+platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0 -- /opt/conda/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jovyan/work/m02/gh-master-oct
+plugins: anyio-3.6.1
+collected 7 items                                                                                                                                                                                       
+
+tests/test_preprocessing.py::test_get_numerical_features_simple PASSED                                                                                                                            [ 14%]
+tests/test_preprocessing.py::test_get_numerical_features_empty PASSED                                                                                                                             [ 28%]
+tests/test_preprocessing.py::test_get_numerical_features_zero_columns PASSED                                                                                                                      [ 42%]
+tests/test_preprocessing.py::test_get_numerical_features_zero_rows PASSED                                                                                                                         [ 57%]
+tests/test_preprocessing.py::test_get_numerical_features_int_and_float PASSED                                                                                                                     [ 71%]
+tests/test_preprocessing.py::test_get_numerical_features_columns_withoutname PASSED                                                                                                               [ 85%]
+tests/test_preprocessing.py::test_get_numerical_features_complex PASSED                                                                                                                           [100%]
+
+=========================================================================================== 7 passed in 0.59s ===========================================================================================
+(base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$     
+
+# CONCEPTOS SOBRE EL TESTING
+- Las funciones más importantes, las troncales, deben ser objetos de tests masivo
+- Lo ideal es Testear TODO, pero no siempre es posible. En ese caso, se prioriza lo que hay que testear
+- Hay que evitar tener Funciones Complicadas (Épicas). Es mejor trocearla
+- Si el test de una función es muy complicado es que la función se debe dividir en funciones atómicas
+- Pytest usa un concepto, la PARAMETRIZACIÓN, de forma que es posible en un mismo test validarlo con cada uno de los parámetros que tiene de entrada
+- Pytest usa un concepto, PREPARATIVOS, FIXTURES, que prepara el ENTORNO para poder hacer el test (ejemplo: subir una base de datos)
+- Metodología TDD: primero los test y, luego, el código. Se una en metodología Agile y apropiado para implementar Casos de Uso
+- Hacer testing de ML es complicado: ¿cómo testeas que un modelo se ha entrenado bien?
+
+# INTEGRACIÓN DE LOS TEST DENTRO DEL CI/CD
+- Se trata de automatizar la ejecución de los test al realizar el build
+- La forma ortodoxa de ejecutar los test es: poetry run pytest
+- Los test necesitan PANDAS. Por tanto, creamos la dependencia en el proyecto ejecutando desde consola "poetry add -D pandas"
+- Nota: para eliminar dependencias de poetry: "poetry remove pandas"
+- 
