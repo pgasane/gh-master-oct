@@ -1014,6 +1014,9 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 # SESIÓN 03.10.2022, tercera parte
 # DOCUMENTACIÓN. CONCEPTOS
 - Trabajamos en index.rst
+- Añadimos dos apartados, install y example, eb index.rst
+- Creamos en la carpeta DOCS/SOURCE dos archivos install.rst y example.rst
+- Seleccionamos install.rst, example.rst e index.rst y hacemos commit y push
 - 
 
 
