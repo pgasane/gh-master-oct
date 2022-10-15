@@ -893,5 +893,114 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - NOTA: mamba env create -f environment.yml es la mejor forma de hacer el EXPORT de un ENTORNO para CLONARLO en PRODUCCIÓN
 - NOTA: evitar combinar CONDA y PIP para instalar LOS MISMOS PAQUETES. 
 
-
+# SESIÓN 03.10.2022, segunda parte
 # DOCUMENTACIÓN
+- Hay que documentar Sí o Sí... Aunque NO SE LE DÉ VALOR PORQUE ES UNA SEÑA DE CALIDAD
+- Se debe dedicar, al menos, un 10% del tiempo de trabajo en documentar
+- Documentar AYUDA A ENTENDER EL CÓDIGO Y DETECTAR ERRORES
+- Usaremos SPHINX y READTHEDOCS para generar automáticamente la documentación y colgarla en repositorios consultables desde Internet
+- En cualquier caso, usaremos PLANTILLAS para que la DOCUMENTACIÓN tenga buena pinta
+- poetry add -D sphinx. # Es una herramienta para DESARROLLADORES no para CLIENTES FINALES
+- sphinx-quitstart. # comando de arranque rápido (no lo ejecutamos, de momento)
+- wich sphinx-quickstart # vemos dónde está el sphinx
+- Estamos en el BASE. Tenemos que hacer para asegurar la ejecución:
+    - poetry shell
+        (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/docs$ poetry shell
+        Spawning shell within /home/jovyan/.cache/pypoetry/virtualenvs/modeltools-YGngTczd-py3.10
+        . /home/jovyan/.cache/pypoetry/virtualenvs/modeltools-YGngTczd-py3.10/bin/activate
+        (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/docs$ . /home/jovyan/.cache/pypoetry/virtualenvs/modeltools-YGngTczd-py3.10/bin/activate
+
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ which sphinx-quickstart
+        /home/jovyan/.cache/pypoetry/virtualenvs/modeltools-YGngTczd-py3.10/bin/sphinx-quickstart
+
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ echo $PATH
+        /home/jovyan/.cache/pypoetry/virtualenvs/modeltools-YGngTczd-py3.10/bin:/opt/conda/bin:/usr/lib/code-server/lib/vscode/bin/remote-cli:/home/jovyan/.local/bin:/opt/conda/condabin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+        La primera opción es la ruta VIRTUALENVS que es la que se ha creado con poetry shell: pypoetry/virtualenvs
+
+        NOTA: hay que tener MUCHO CUIDADO en ESTAR EN LA CARPETA DEL PROYECTO, NO EN LA CARPETA SUPERIOR
+
+    - Entramos en la carpeta DOCS del proyecto y ejecutamos sphinx-quickstart:
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/docs$ sphinx-quickstart
+        Welcome to the Sphinx 5.2.3 quickstart utility.
+
+        Please enter values for the following settings (just press Enter to
+        accept a default value, if one is given in brackets).
+
+        Selected root path: .
+
+        You have two options for placing the build directory for Sphinx output.
+        Either, you use a directory "_build" within the root path, or you separate
+        "source" and "build" directories within the root path.
+        > Separate source and build directories (y/n) [n]: y
+
+        The project name will occur in several places in the built documentation.
+        > Project name: modeltools
+        > Author name(s): Pedro Gasané
+        > Project release []: 
+
+        If the documents are to be written in a language other than English,
+        you can select a language here by its language code. Sphinx will then
+        translate text that it generates into that language.
+
+        For a list of supported codes, see
+        https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language.
+        > Project language [en]: 
+
+        Creating file /home/jovyan/work/m02/gh-master-oct/docs/source/conf.py.
+        Creating file /home/jovyan/work/m02/gh-master-oct/docs/source/index.rst.
+        Creating file /home/jovyan/work/m02/gh-master-oct/docs/Makefile.
+        Creating file /home/jovyan/work/m02/gh-master-oct/docs/make.bat.
+
+        Finished: An initial directory structure has been created.
+
+        You should now populate your master file /home/jovyan/work/m02/gh-master-oct/docs/source/index.rst and create other documentation
+        source files. Use the Makefile to build the docs, like so:
+        make builder
+        where "builder" is one of the supported builders, e.g. html, latex or linkcheck.
+
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/docs$
+    
+    - Aparece una nueva carpeta SOURCE que contiene, entre otras:
+        - conf.py: contiene metadatos del proyecto. Los metadatos se pueden leer directamente del pyproject.toml. Permite cambiar la apariencia usando TEMAS
+        - index.rst: contiene el índice de la documentación. Los metadatos se pueden leer directamente del pyproject.toml
+    - Modificamos el index.rst y en consola hacemos:
+        - Dentro de la carpeta DOCS se crearon MAKE.BAT y MAKEFILE
+        - make html # genera la versión html de la documentación del proyecto que se subirá a READTHEDOCS. Lo que se genere se puede cargar en otro Servidor Web.
+            (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/docs$ make html
+            Running Sphinx v5.2.3
+            making output directory... done
+            building [mo]: targets for 0 po files that are out of date
+            building [html]: targets for 1 source files that are out of date
+            updating environment: [new config] 1 added, 0 changed, 0 removed
+            reading sources... [100%] index                                                                                                                                                                         
+            looking for now-outdated files... none found
+            pickling environment... done
+            checking consistency... done
+            preparing documents... done
+            writing output... [100%] index                                                                                                                                                                          
+            generating indices... genindex done
+            writing additional pages... search done
+            copying static files... done
+            copying extra files... done
+            dumping search index in English (code: en)... done
+            dumping object inventory... done
+            build succeeded.
+
+            The HTML pages are in build/html.
+            (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/docs$
+
+            Aparece una nueva carpeta, dentro de DOCS, llamada BUILD/HTML que contiene la versión HTML de la documentación. El fichero index.html la abre.
+
+        - READTHEDOCS: subimos la documentación a nuestra cuenta con los siguientes pasos:
+            - NOTA: se puede enviar desde el GitHub Actions. Nosotros usaremos la forma manual.
+            - ReadTheDocs se conecta a nuestro repositorio GitHub, genera la documentación y la sube
+            - Para ellos debemos darles acceso a nuestra cuenta de GitHub:
+                - Entramos en ReadTheDocs
+                - Pulsamos en Conecta tus cuentas
+                - Connect to GitHub: aportar las credenciales
+                - 
+
+
+
+
