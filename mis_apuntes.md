@@ -1018,6 +1018,7 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - Creamos en la carpeta DOCS/SOURCE dos archivos install.rst y example.rst
 - Seleccionamos install.rst, example.rst e index.rst y hacemos commit y push
 - En index.rst se indican los nombres de los ficheros .rst que se creen para extender la documentación
+- Nota: es posible que la primera vez no se vea el cambio reflejado al visualizar el HTML. Es necesario pulsar en la sección nueva para que después se vea en la index.html
 - 
 
 
