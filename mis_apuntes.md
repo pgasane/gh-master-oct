@@ -999,7 +999,22 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
                 - Entramos en ReadTheDocs
                 - Pulsamos en Conecta tus cuentas
                 - Connect to GitHub: aportar las credenciales
-                - 
+                - Hacemos commit con los nuevos archivos ubicados en docs
+                - Hacemos push
+                - Volvemos a ReadTheDocs y hacemos:
+                    - Pulsamos en Importar Proyecto
+                    - Seleccionamos en el que estamos trabajando
+                    - Pulsamos en el signo +
+                    - Pulsamos en siguiente
+                    - Pulsamos en Versión de Compilación
+                    - Se realiza la compilación mostrando los comandos que está ejecutando. Se parece mucho al BUILD que ya conocemos
+                    - Cuando veamos "Compilación Completada" ya podemos pulsar en "Ver Documentación" en esta ruta: https://gh-master-oct.readthedocs.io/en/latest/
+                - NOTA: para los repositorios privados hay que pagar.
+
+# SESIÓN 03.10.2022, tercera parte
+# DOCUMENTACIÓN. CONCEPTOS
+- Trabajamos en index.rst
+- 
 
 
 
