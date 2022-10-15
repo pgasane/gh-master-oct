@@ -13,9 +13,7 @@ Esta es la Documentación General de nuestro proyecto modeltools
 
 Autores
 =======
-Todos los que sientan pasión por MLOps.
-
-.. Árbol de Contenidos. Ejemplos: ¿Cómo instalar la librería?. ¿Cómo desplegar en producción?...
+Todos los que sientan pasión por MLOps
 
 .. toctree::   
    :maxdepth: 2

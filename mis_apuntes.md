@@ -1017,6 +1017,7 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - Añadimos dos apartados, install y example, eb index.rst
 - Creamos en la carpeta DOCS/SOURCE dos archivos install.rst y example.rst
 - Seleccionamos install.rst, example.rst e index.rst y hacemos commit y push
+- En index.rst se indican los nombres de los ficheros .rst que se creen para extender la documentación
 - 
 
 
