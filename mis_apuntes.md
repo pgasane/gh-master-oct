@@ -1221,8 +1221,22 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
                 autoapi_dirs = ['../../modeltools']
         - Ya está ACTIVADO el AUTOAPI
     # EJERCICIO: crea una nueva función en preprocessing.py, documéntala y comprueba que en RTD se actualiza la documentación
-     
+    - Se completó el trabajo con un fallo por UN ESPACIO EN BLANCO. Una vez identificado el problema, ¡resuelto!
 
+- BOILERPLATE: preparación repetitiva que NO APORTA VALOR y está afectada por MUCHOS FALLOS HUMANOS. Para evitar los boilerplates, ¡usamos plantillas!
+
+# RESUMEN DEL PROFESOR SOBRE DOCUMENTACIÓN:
+- SPHINX es más completo pero requiere más trabajo de configuración y su sintáxis es poco familiar
+- SPHINX y MyST es una solución muy popular porque tiene lo mejor de todos los mundos. Si tuviera que hacer un proyecto completo ésta sería mi propuesta
+- MkDocsStrings es más fácil de entender y usar pero menos extensible
+- PDOC es cero esfuerzo porque sólo usa docstrings (esto nos fuerza a diseñar bien la estructura) que es rígida. Ideal para poca experiencia o poco tiempo 
+
+# PLANTILLAS PARA GENERAR DOCUMENTACIÓN DE FORMA SENCILLA
+- PDOC: https://pdoc.dev/ Se instala y listo: pip install pdoc.
+- JUPYTERBOOK: https://jupyterbook.org/en/stable/intro.html Monta libros usando notebooks
+
+# MEJORA DE LA DOCUMENTACIÓN TIPO WOW CAMBIANDO EL TEMA A FURO
+- 
     
 
 
