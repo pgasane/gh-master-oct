@@ -15,7 +15,7 @@ author = 'Pedro Gasané'
 
 extensions = [
     'sphinx.ext.autodoc',
-    'autoapi.extension',
+    'autoapi.extension'
 ]
 
 autoapi_type = 'python'
