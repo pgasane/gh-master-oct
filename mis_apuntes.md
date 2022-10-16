@@ -1019,7 +1019,19 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - Seleccionamos install.rst, example.rst e index.rst y hacemos commit y push
 - En index.rst se indican los nombres de los ficheros .rst que se creen para extender la documentación
 - Nota: es posible que la primera vez no se vea el cambio reflejado al visualizar el HTML. Es necesario pulsar en la sección nueva para que después se vea en la index.html
-- 
+- Nota: con cada push se actualiza la documentación. Se puede ver la ejecución pulsando en "Compilaciones" de ReadTheDocs
+- Ejemplos de documentación: sklearn (se puede ver en docs/source), https://pandas.pydata.org/docs/getting_started/index.html#getting-started
+- Siempre podemos acceder código fuente pulsando en "Show Source", escrito en rst, de cualquier documentación que puede servir de ejemplo
+# DOCUMENTAR DENTRO DEL CÓDIGO FUENTE, DOCTEST
+- Por ejemplo: """ Este módulo contiene [...] """ que hemos usado en preprocessing.py
+- Ejemplo de DocTest: https://github.com/scikit-learn/scikit-learn/blob/08275348cd2c186386d848bbe0099478049a4589/sklearn/model_selection/_split.py#L2334 
+    - DocString de una función: introducción a la función, definición de los parámetros, lo que devuelve la función, Ejemplos
+    - Un DocString vale para documentar y para hacer test
+    - Para que pytest interprete un DocString como test a validar se debe configurar. Para ello:
+        - pytest --doctest-modules. # Se configura para que lea todos los test
+    - Se necesita que la configuración quede fija. Para ello:
+        - 
+
 
 
 
