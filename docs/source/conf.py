@@ -13,7 +13,13 @@ author = 'Pedro Gasané'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'autoapi.extension',
+]
+
+autoapi_type = 'python'
+autoapi_dirs = ['../../modeltools']
 
 templates_path = ['_templates']
 exclude_patterns = []

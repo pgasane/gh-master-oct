@@ -1047,9 +1047,182 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
     v0.2.5
     v0.2.6
     (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
-- 
+- git tag -a v0.2.7 -m "v0.2.7 Añadido a pytest los docStrings"
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ git tag -a v0.2.7 -m "v0.2.7 Añadido a pytest los docStrings"
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ git tag
+    list
+    v0.2.2
+    v0.2.3
+    v0.2.4
+    v0.2.5
+    v0.2.6
+    v0.2.7
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$
+- git push --follow-tags
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ git push --follow-tags
+    Enumerating objects: 12, done.
+    Counting objects: 100% (12/12), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (7/7), done.
+    Writing objects: 100% (7/7), 1.03 KiB | 58.00 KiB/s, done.
+    Total 7 (delta 4), reused 0 (delta 0), pack-reused 0
+    remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+    To github.com:pgasane/gh-master-oct.git
+    cab8181..3afc4a0  main -> main
+    * [new tag]         v0.2.7 -> v0.2.7
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
+
+# SESIÓN 06.10.2022
+# DOCUMENTACIÓN. DOCSTRINGS Y DOCTESTS
+- Escribir la documentación en el propio código es muy práctico y útil porque permite, incluso, crear test que reconoce pytest
+- DOCSTRINGS son CADENAS DE TEXTO que se ponen al principio de módulo y paquetes, funciones, clases y métodos de las clases
+- DOCSTRINGS no tiene un formato establecido. Se puede escribir lo que queramos aunque, como vimos, existe una lógica que se usa de facto
+- Tener tests y docstrings es de GRAN ayuda
+- Ejemplos:
+    def mi_funcion(a):
+        """ Esta función es ideal """
+        return 10_000 * 2
+
+    class MiClase:
+        """ Esta clase es aún mejor """
+
+        def __init__(self,a):
+            """ docstring del método """
+
+ - Documentar BIEN es:
+    - Es escribir CÓDIGO ENTENDIBLE y FÁCIL DE LEER
+    - Escribir lo necesario para comprender el código sin contarlo TODO
+    - Saber quién es el DESTINATARIO del docstring y adaptase a ese perfil
+    - No pasarse ni quedarse corto (esto es un ARTE y se aprende con la práctica)
+    - Hacerlo PRIORIZANDO: primero, los elementos complejos de entender o funciones muy utilizadas que tienen que quedar MUY CLARAS
+        Ejemplo: train_test_split de la libreria scikit-learn (sklearn). 
+        Documentación Oficial: github.com/scikit-learn/scikit-learn/blob/3275beab03162764463022caa4acafd8a443ac85/sklearn/model_selection/_split.py#L2334
+        NOTA: recomiendo leer la documentación de sklearn porque se aprende mucho. 
+    - Usar BIEN el SINGULAR y el PLURAR a la hora de definir los parámetros. 
+        NOTA: "*" en documentación en significa "cualquier número" https://www.codigopiton.com/como-usar-asterisco-y-doble-asterisco-en-python/
+        Ese parámetro funcionará como una TUPLA que tendrá tantos valores como argumentos se hayan pasado al invocar a la función
+            
+            def saludar(*nombres): # anteponemos un asterisco al nombre del parámetro
+
+                print(nombres) # vemos como nombres es una tupla con todos los parámetros recibidos (se han empaquetado)
+
+                for nombre in nombres: # recorremos la tupla
+                    print(f'¡Hola, {nombre}!') # y saludamos
 
 
+            saludar('Juan')
+            saludar('Juan', 'Laura', 'Lucía')
 
+    - Decidir si con escribir EJEMPLOS es SUFICIENTE para que se entienda
+    - ¿Cuándo usar docstring y cuando escribo en la propia documentación?
+        - Los docstring tienen su sitio natural al lado del código que explican
+        - Los docstring de módulos no suelen ser muy amplios y se suele ubicar en DOCS usando herramientas como sphinx
+
+- NO TODO ES DOCUMENTAR: 
+    - Hay que usar NOMBRES DE VARIABLES DESCRIPTIVAS aunque el código sea más largo
+        Ejemplo:
+            def circ(r):
+                return (math.pi*r*2, 2*math.pr*r)
+
+            # Se lee y entiende más rápido
+            def circle_properties(radius):
+                area = math.pi*radius**2
+                circumference = 2*math.pi*radius
+
+                return (area, circumference)
+
+    - El código se escribe una vez y se lee miles de veces. Hay que optimizar LA LECTURA
+
+- ESTILOS DE DOCSTRING
+    - Numpy, Sphinx y Google son los tres Estilos más usados
+    - Nota profesor: a mi me gusta más el de Google. Nosotros usaremos SPHINX
+    - Ejemplo SPHINX
+        
+        def ejemplo_docstring(a, b):
+            """ Esta función es un ejemplo
+
+            :param a: primer operando
+            :type a: int
+            :param b: segundo operando
+            :type b: int
+
+            :raises: excepciones
+            
+            :return: suma de a y b
+            :rtype: int
+
+            """
+            return a + b
+        
+    - Estilos NUMPY y GOOGLE: https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
+    
+- EJERCICIO: documentar preprocessing.py con el estilo sphinx
+    '''
+    Devuelve todas las columnas numéricas de un DataFrame
+    Entrada DataFrame
+    Salida Lista con las columnas numéricas del DataFrame de entrada
+    '''
+    def get_numerical_features(df):
+        """ get_numerical features devuelve una lista con el nombre de las columnas que contienen datos de tipo numérico
+        
+        Parámetros
+        ----------
+
+        :param df: dataframe
+        :type df: pandas.DataFrame
+        :return: Lista con el nombre de las columnas con valores numéricos
+        :rtype: List[str]
+
+        Ejemplos
+        --------
+
+        >>> from modeltools.preprocessing import get_numerical_features
+        >>> import pandas as pd
+        >>> df = pd.DataFrame({"a":[1]})
+        >>> get_numerical_features(df)
+        ['a']
+
+        """
+        
+        return list(df.select_dtypes(include=[np.number]).columns)
+
+- ACTIVAR LA DOCUMENTACIÓN AUTOMÁTICA
+    - Se puede activar para que el código se formatee automáticamente sin que el programador tenga que preocuparse por ello
+    - Funcionará si SE RESPETA EL FORMATO SPHINX. En caso contrario, no funcionará
+    - AUTOSUMMARY es la utilidad oficial de SPHINX para automatizar el formato, pero NO FUNCIONA (Esto pasa con mucha frecuencia)
+        https://stackoverflow.com/questions/2701998/sphinx-autodoc-is-not-automatic-enough
+    
+    - AUTOAPI es la solución, no oficial de sphinx, para poder automatizar la documentación
+
+    - CONCEPTO: DEPENDENCIAS SOLO PARA DOCUMENTAR
+        - Hay opiniones que no hacen distinción entre las DEPENDENCIAS DE CÓDIGO y las DEPENDENCIAS DE DOCUMENTACIÓN
+        - Nuestro código no necesita AUTOAPI para funcionar por lo que yo (profesor) no lo considero DEPENDENCIA DE CÓDIGO
+    - Para separar las DEPENDENCIAS DE DOCUMENTACIÓN, RTD (Read The Docs), de las DEPENDENCIAS DE CÓDIGO se necesita:
+        - Crear un fichero llamado requirements.txt en la carpeta docs/source con el siguiente texto:
+            # docs/source/requirements.txt
+            autoapi
+        - Nota: si quisiéramos usar AUTOAPI en local, se tendría que instalar: mamba install autoapi
+        - Vamos a la Web Read The Docs con nuestra sesión abierta
+            - Abrimos el proyecto con el que estamos trabajando
+            - Pulsamos en "Admin"
+            - Pulsamos en "Advanced Settings"
+            - Añadir la ruta docs/source/requirements.txt en el campo "Fichero de Requisitos"
+            - Pulsamos en guardar
+        - Abrimos el archivo conf.py que está en docs/source
+            - Añadimos el siguiente texto:
+                extensions = [
+                    'sphinx.ext.autodoc',
+                    'autoapi.extension',
+                ]
+            autoapi busca en toda la carpeta formatos de documentación docstrings
+            autodoc aplica el estilo sphinx en todo lo que encuentre
+            - Añadimos el siguiente texto:
+                autoapi_type = 'python'
+                autoapi_dirs = ['../../modeltools']
+        - Ya está ACTIVADO el AUTOAPI
+    # EJERCICIO: crea una nueva función en preprocessing.py, documéntala y comprueba que en RTD se actualiza la documentación
+     
+
+    
 
 
