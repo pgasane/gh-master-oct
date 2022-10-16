@@ -1030,7 +1030,24 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
     - Para que pytest interprete un DocString como test a validar se debe configurar. Para ello:
         - pytest --doctest-modules. # Se configura para que lea todos los test
     - Se necesita que la configuración quede fija. Para ello:
-        - 
+        - abrimos pyproject.toml y creamos una sessión para pytest: [tool.pytest.ini_options] addopts = "--doctest-modules"
+# NOTA: gh gist create modeltools/preprocessing.py crea una URL que se puede compartir para que se descarguen el documento
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ gh gist create modeltools/preprocessing.py
+    - Creating gist preprocessing.py
+    ✓ Created secret gist preprocessing.py
+    https://gist.github.com/707eb92cd535d78f7c893fa3f851183a
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
+# Realizamos una nueva Release
+- git tag
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ git tag
+    list
+    v0.2.2
+    v0.2.3
+    v0.2.4
+    v0.2.5
+    v0.2.6
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
+- 
 
 
 

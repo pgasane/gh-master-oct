@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "modeltools"
-version = "0.2.6"
+version = "0.2.7"
 description = ""
 authors = ["Your Name <you@example.com>"]
 
@@ -19,4 +19,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
+
  

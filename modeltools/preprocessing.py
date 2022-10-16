@@ -27,5 +27,6 @@ def get_numerical_features(df):
     ['a']
 
     """
+    
     return list(df.select_dtypes(include=[np.number]).columns)
     
