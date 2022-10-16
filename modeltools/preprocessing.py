@@ -58,7 +58,7 @@ def suma_n(*numeros):
 
     >>> from modeltools.preprocessing import suma_n
     >>> suma_n(5,5,5,5,5,5,5,5,5, 23.12, complex(3,4))
-   (71.12+4j)
+    (71.12+4j)
 
     """
     
