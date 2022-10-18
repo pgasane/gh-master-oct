@@ -26,8 +26,8 @@ jobs:             # "A JOB is a series of STEPS that constitute a process, usual
         if: success() || failure()  # Queremos que muestre los test en todos los casos (fallen o no fallen)
         with:
           name: Test
-          path: jest-junit.xml. # El fichero se crea en la carpeta raíz del modeltools
-          reporter: java-junit. # Es el formato con el que se muestra. Hay muchos. Dejamos el que se usa por defecto
+          path: jest-junit.xml # El fichero se crea en la carpeta raíz del modeltools
+          reporter: java-junit # Es el formato con el que se muestra. Hay muchos. Dejamos el que se usa por defecto
 
       - name: Publish to GH Releases. # Paso para publicar los binarios generados con el comendo "poetry build" en GitHub
         if: startsWith(github.ref, 'refs/tags/v')
