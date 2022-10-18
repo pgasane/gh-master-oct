@@ -68,3 +68,19 @@ def suma_n(*numeros):
         suma = suma + numero
 
     return suma
+
+"""_summary_
+Función para probar el autodocstring
+Se crea la documentación para las variables
+"""
+def hola(a, b, c, d):
+    """_summary_
+
+    Args:
+        a (_type_): _description_
+        b (_type_): _description_
+        c (_type_): _description_
+        d (_type_): _description_
+    """
+
+    return 1

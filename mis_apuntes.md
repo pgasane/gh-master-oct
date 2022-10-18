@@ -422,7 +422,7 @@ tests/test_preprocessing.py::test_get_numerical_features_complex PASSED         
 /usr/lib/code-server/lib/vscode/bin/remote-cli:/home/jovyan/.local/bin:/opt/conda/bin:/opt/conda/condabin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # COMANDOS BÁSICOS DE CONDA O MAMBA
-- CONDA se usa para CREAR, BORRAR ACTIVAR y DESACTIVAR ENTORNOS: conda env list, conda activate entorno, conda deactivate, conda create --name entorno, conda env remove --name entorno
+- CONDA se usa para CREAR, BORRAR ACTIVAR y DESACTIVAR ENTORNOS: conda env list, conda create --name entorno, conda activate entorno, conda deactivate, , conda env remove --name entorno
 - MAMBA se usa para INSTALAR y DESINSTALAR PAQUETES: mamba install paquete, mamba remove paquete
 - conda env list # mostrar los entornos existentes
 - conda create --name entorno # crea un entorno vacío
@@ -1236,7 +1236,163 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - JUPYTERBOOK: https://jupyterbook.org/en/stable/intro.html Monta libros usando notebooks
 
 # MEJORA DE LA DOCUMENTACIÓN TIPO WOW CAMBIANDO EL TEMA A FURO
-- 
-    
+- https://sphinx-themes.org
+- Modificamos conf.py: cambiamos el tema por defecto a "furo"
+- Modificamos requirements.txt: añadimos como dependencia "furo"
+
+# DOCTEST
+- Permite ejecutar los ejemplos que se incluyen en la documentación como test. Esto aumenta la calidad y verificación del código
+- Se indica ">>>" como si fuera el prompt
+- Si necesitamos más líneas se usa ">>>" y las siguientes líneas con "..."
+- Activar doctest: se pone el siguiente código en pyproject.toml:
+    [tool.pytest.ini_options]
+    addopts = "--doctest-modules" 
+
+# AMPLIAMOS TESTING
+- Es muy importante que el ENTORNO sea el correcto antes de empezar a testear
+- Tipos de TEST:
+    - UNITARIOS: los que hemos escrito en test_preprocessing.py. Se verifica una unidad de código (una función, por ejemplo)
+    - INTEGRACIÓN: comprobar la interconexión entre diferentes servicios. Son complicados. Requieren ejecución de software externos. https://docs.pytest.org/en/6.2.x/fixture.html. Ejemplo: abrir base de datos, cargar datos y volver a conectar para confirmar que se han guardado los datos. 
+- Instalamos AutoDocStrings pulsando en Extensiones de JupyterLab que permite que AL TECLEAR """ DA LA OPCIÓN DE GENERAR EL DOCSTRING DE FORMA AUTOMÁTICA
+- autoDocstring.docstringFormat # Configuro en settings "a pelo"
+- Si en una función pulsamos """ para iniciar un comentario te sale una lista en la que se lee "Generate AutoDocString". Si la seleccionamos genera automáticamente la documentación
+    def hola(a, b, c, d):
+    """_summary_
+
+    Args:
+        a (_type_): _description_
+        b (_type_): _description_
+        c (_type_): _description_
+        d (_type_): _description_
+    """
+- VER EL RESULTADO DE LOS TEST EN LA PROBETA
+    - Pulsamos en la izquierda el último símbolo del menú (la probeta)
+    - Seleccionarmos el Entorno PYTHON 3.10.6 (recomendado)
+    - Veremos la lista de todos los test del proyecto mltools con información sobre el estado de los mismos
+    - Es muy útil para seguir codificando sin tener que salir para saber si los test dan error o no
+    - Si pulsamos en el icono carpeta a la derecha del test, nos vamos al código fuente y podemos trabajar con el código sobre la marcha
+
+    - Ejecutamos por PRIMERA VEZ "pytest --ff" y observamos que se nos muestra la línea donde se produce el fallo, el módulo que falla, etc.
+
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ pytest --ff
+
+        ================================================================================================== test session starts ===================================================================================================
+        platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0
+        rootdir: /home/jovyan/work/m02/gh-master-oct, configfile: pyproject.toml
+        collected 10 items                                                                                                                                                                                                       
+        run-last-failure: no previously failed tests, not deselecting items.
+
+        modeltools/preprocessing.py ..                                                                                                                                                                                     [ 20%]
+        tests/test_preprocessing.py .......E                                                                                                                                                                               [100%]
+
+        ========================================================================================================= ERRORS =========================================================================================================
+        ______________________________________________________________________________________________ ERROR at setup of test_hola _______________________________________________________________________________________________
+        file /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py, line 81
+        def test_hola(a, b, c, d):
+        E       fixture 'a' not found
+        >       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+        >       use 'pytest --fixtures [testpath]' for help on them.
+
+        /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py:81
+        ================================================================================================ short test summary info =================================================================================================
+        ERROR tests/test_preprocessing.py::test_hola
+        =============================================================================================== 9 passed, 1 error in 0.82s ===============================================================================================
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
+
+    - Ejecutamos por SEGUNDA VEZ pytest -ff y se muestra el mensaje "ERROR at setup of test_hola"
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ pytest --ff
+        ================================================================================================== test session starts ===================================================================================================
+        platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0
+        rootdir: /home/jovyan/work/m02/gh-master-oct, configfile: pyproject.toml
+        collected 10 items                                                                                                                                                                                                       
+        run-last-failure: no previously failed tests, not deselecting items.
+
+        modeltools/preprocessing.py ..                                                                                                                                                                                     [ 20%]
+        tests/test_preprocessing.py .......E                                                                                                                                                                               [100%]
+
+        ========================================================================================================= ERRORS =========================================================================================================
+        ______________________________________________________________________________________________ ERROR at setup of test_hola _______________________________________________________________________________________________
+        file /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py, line 81
+        def test_hola(a, b, c, d):
+        E       fixture 'a' not found
+        >       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+        >       use 'pytest --fixtures [testpath]' for help on them.
+
+        /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py:81
+        ================================================================================================ short test summary info =================================================================================================
+        ERROR tests/test_preprocessing.py::test_hola
+        =============================================================================================== 9 passed, 1 error in 0.82s ===============================================================================================
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ pytest --ff
+        ================================================================================================== test session starts ===================================================================================================
+        platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0
+        rootdir: /home/jovyan/work/m02/gh-master-oct, configfile: pyproject.toml
+        collected 10 items                                                                                                                                                                                                       
+        run-last-failure: rerun previous 1 failure first
+
+        tests/test_preprocessing.py E                                                                                                                                                                                      [ 10%]
+        modeltools/preprocessing.py ..                                                                                                                                                                                     [ 30%]
+        tests/test_preprocessing.py .......                                                                                                                                                                                [100%]
+
+        ========================================================================================================= ERRORS =========================================================================================================
+        ______________________________________________________________________________________________ ERROR at setup of test_hola _______________________________________________________________________________________________
+        file /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py, line 81
+        def test_hola(a, b, c, d):
+        E       fixture 'a' not found
+        >       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+        >       use 'pytest --fixtures [testpath]' for help on them.
+
+        /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py:81
+        ================================================================================================ short test summary info =================================================================================================
+        ERROR tests/test_preprocessing.py::test_hola
+        =============================================================================================== 9 passed, 1 error in 0.52s ===============================================================================================
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
+
+
+    - Ejecutamos "pytest --ff -x"
+        (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ pytest --ff -x
+    ================================================================================================== test session starts ===================================================================================================
+    platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0
+    rootdir: /home/jovyan/work/m02/gh-master-oct, configfile: pyproject.toml
+    collected 10 items                                                                                                                                                                                                       
+    run-last-failure: rerun previous 1 failure first
+
+    tests/test_preprocessing.py E
+
+    ========================================================================================================= ERRORS =========================================================================================================
+    ______________________________________________________________________________________________ ERROR at setup of test_hola _______________________________________________________________________________________________
+    file /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py, line 81
+    def test_hola(a, b, c, d):
+    E       fixture 'a' not found
+    >       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+    >       use 'pytest --fixtures [testpath]' for help on them.
+
+    /home/jovyan/work/m02/gh-master-oct/tests/test_preprocessing.py:81
+    ================================================================================================ short test summary info =================================================================================================
+    ERROR tests/test_preprocessing.py::test_hola
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ==================================================================================================== 1 error in 0.56s ====================================================================================================
+    (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ 
+
+    IMPORTANTE: 
+        pytest --ff     TESTEA LOS TEST QUE HAN FALLADO PREVIAMENTE para que SEA MÁS FÁCIL ARREGLAR LO QUE NO FUNCIONA "run-last-failure: rerun previous 1 failure first"
+        pytest --ff -x  LO MISMO QUE ANTES, PERO PARA EN EL PRIMER ERROR PARA CENTRARNOS EN CORREGIR ESTE TEST
+
+
+# INTEGRANDO CI/CD Y TESTING
+- Esto es especialmente útil en metodologías AGILE
+- Ahora en el BUILDING ejecutamos PYTEST y ver si falla, pero no tenemos más información útil para desarrolladores
+- GitHub tiene herramientas para mostrar informes sobre lo que está fallando con respecto a los test
+- Objetivo: usar un formato estandarizado de test que aporte valor al programador, enviárselo a GitHub para que éste se lo muestre al desarrollador
+- Usaremos GitHub Checks: docs.github.com/es/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
+- EJERCICIO:
+   - "pytest --ff -x --junitxml=jest-junit.xml" # Devuelve la salida de pytest en un formato que GitHub Actions pueda procesar (eXtensible Markup Language - XML)
+   - Queremos que los test se ejecuten en cada commit, así que vamos a eliminar el criterio de ON con el filtro de tag y vamos a dejar simplemente "on: [push]
+   - Añadiremos una condición if en poetry.build: "if: startsWith(github.ref, 'refs/tags/v')" para que solo se ejecute con el COMMIT
+   - OBJETIVO 1: que TODOS los COMMITS se hagan, pero SOLO LOS QUE TIENEN ETIQUETA SEAN RELEASE
+   - OBJETIVO 2: que el github me INFORME DEL RESULTADO DEL PYTEST. Para ello hay que añadir un nuevo paso que haga "dorny/test-reporter@v1
+   - 
+
+
+
 
 
