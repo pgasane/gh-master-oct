@@ -78,5 +78,6 @@ def test_get_numerical_features_complex():
 """_summary_
 Esta función falla para ver el uso de los comandos pytest --ff y pytest --ff -x
 """
-def test_hola(a, b, c, d):
-    return 1 == 1
+def test_hola():
+    
+    assert 1 == 1
