@@ -1394,8 +1394,20 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
         - Ha salido todo correcto. Cuando un test falla, se muestra el error a nivel de línea de código. En la historia de commit se pueden ver los correctos y fallidos.
         - Los commit que fallan no deberían subirse a producción
 
-# EVALUANDO LA CALIDAD DEL TESTING
-- 
+# GENERAMOS v0.2.8
+
+# EVALUANDO LA CALIDAD DEL TESTING CON COVERAGE
+- Hace un cálculo estadístico de las líneas de código sin error. 
+- Cuidado porque no significa necesariamente que los test estén bien hechos.
+- El Equipo de Desarrollo debe ser honesto
+- ¿Cómo lo hacemos?
+    - Instalamos el paquete pytest-cov desde consola usando poetry: poetry add -D pytest-cov
+    - En consola ejecutamos: poetry run pytest --cov=modeltools --cov-report=html
+    - Objetivo: que el TESTING FALLE SI EL COVERAGE ESTÁ POR DEBAJO DE UN UMBRAL MÍNIMO DE CALIDAD
+- IMPORTANTE: COVERAGE informa del código al que no se ha definido ningún test que valore la calidad del mismo
+
+# INTEGRANDO EL INFORME DE COVERAGE EN GITHUB
+-  
 
 
 
