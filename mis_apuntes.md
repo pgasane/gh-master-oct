@@ -1388,9 +1388,14 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
    - "pytest --ff -x --junitxml=jest-junit.xml" # Devuelve la salida de pytest en un formato que GitHub Actions pueda procesar (eXtensible Markup Language - XML)
    - Queremos que los test se ejecuten en cada commit, así que vamos a eliminar el criterio de ON con el filtro de tag y vamos a dejar simplemente "on: [push]
    - Añadiremos una condición if en poetry.build: "if: startsWith(github.ref, 'refs/tags/v')" para que solo se ejecute con el COMMIT
-   - OBJETIVO 1: que TODOS los COMMITS se hagan, pero SOLO LOS QUE TIENEN ETIQUETA SEAN RELEASE
+   - OBJETIVO 1: que TODOS los COMMITS se hagan, pero SOLO LOS QUE TIENEN ETIQUETA o SEAN RELEASE
    - OBJETIVO 2: que el github me INFORME DEL RESULTADO DEL PYTEST. Para ello hay que añadir un nuevo paso que haga "dorny/test-reporter@v1
-   - 
+   - RESULTADO: 
+        - Ha salido todo correcto. Cuando un test falla, se muestra el error a nivel de línea de código. En la historia de commit se pueden ver los correctos y fallidos.
+        - Los commit que fallan no deberían subirse a producción
+
+# EVALUANDO LA CALIDAD DEL TESTING
+- 
 
 
 
