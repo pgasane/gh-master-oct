@@ -1423,6 +1423,55 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - gh gist create .github/workflows/build.yml
 - Se genera URL: https://gist.github.com/double-thinker/39388101c93306245a4a28a8c66618d1 que se puede enviar al destinatario
 
+# GENERACIÓN AUTOMÁTICA DE RELEASE USANDO BUMP Y SEMVER
+- Ejecutamos en consola:
+    - poetry version patch
+    - poetry version minor
+    - poetry version major
+    
+    (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/modeltools$ poetry version patch
+    Bumping version from 0.2.10 to 0.2.11
+    (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/modeltools$ poetry version minor
+    Bumping version from 0.2.11 to 0.3.0
+    (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct/modeltools$ poetry version major
+    Bumping version from 0.3.0 to 1.0.0
+    
+    - patch hace referencia a la parte derecha
+    - minor hace referencia a la parte media
+    - major hace referencia a la parte izquierda
+
+    - Se denomina SEMANTIC VERSIONING o SEMVER, major.minor.patch.
+    - La prioridad es de IZQUIERDA a DERECHA
+    
+    - MAJOR solo aumenta cuando la API genera incompatibilidades
+    - MINOR solo aumenta cuando se añade una FUNCIONALIDAD NUEVA que no genera INCOMPANTIBILIDAD
+    - PATCH solo aumenta cuando se CORRIGEN ERRORES MENORES que NO GENERAN COMPATIBILIDAD
+
+    - Los gestores de paquetes usan esta información para realizar las actualizaciones de librerías
+    
+    - Las versiones se actualizan haciendo:
+        - poetry version patch
+        - poetry version minor
+        - poetry version major
+    
+    - El símbolo "^" que vemos en pyproject.toml significa "PUEDES USAR NUEVAS VERSIONES SIN GENERAR INCOMPATIBILIDADES"
+
+# ESTILO Y LINTING
+- El código debe ser correcto y MANTENIENDO EL ESTILO de forma COMÚN para evitar CÓDIGO INCÓMODO DE LEER
+- Las FUNCIONES son VERBOS o SUSTANTIVOS
+- Uso de PLURALES o SINGULARES, etc
+- LINTER es la herramienta que verifica el ESTILO y el LINTING
+- Usaremos BLACK. 
+- Lo instalamos en consola: poetry add -D black
+- Se ejecuta en consola sobre la carpeta test: poetry run black tests/
+    (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ poetry run black ./tests/
+    reformatted tests/test_preprocessing.py
+
+    All done! ✨ 🍰 ✨
+    1 file reformatted, 1 file left unchanged.
+
+
+
 
 
 
