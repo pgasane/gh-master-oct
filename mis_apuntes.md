@@ -1407,7 +1407,18 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - IMPORTANTE: COVERAGE informa del código al que no se ha definido ningún test que valore la calidad del mismo
 
 # INTEGRANDO EL INFORME DE COVERAGE EN GITHUB
--  
+- Se añade el siguiente código a build.yml como un paso más:
+    - uses: devmasx/coverage-check-action@v1.2.0. # Añadimos coverage de los test de nuestro código
+    with:
+        type: lcov
+        result_path: coverage.lcov # Hay que tener cuidado dónde se colocan los ficheros de salida para poner el path correcto
+        min_coverage: 90 # Establecemos un valor mínimo del 90% de código cubierto por los test
+        token: ${{ github.token }}
+- El resultado es que sale una pestaña nueva en el test llamada COVERAGE que muestra el valor alcanzado de coverage y el mínimo esperado.
+- Si no se alcanza el mínimo, se devuelve error
+
+
+
 
 
 
