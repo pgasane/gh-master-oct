@@ -1417,6 +1417,12 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
 - El resultado es que sale una pestaña nueva en el test llamada COVERAGE que muestra el valor alcanzado de coverage y el mínimo esperado.
 - Si no se alcanza el mínimo, se devuelve error
 
+# UTILIDAD: PASAR UN GIST DE UN ARCHIVO PARA DESCARGAR DESDE INTERNET
+- gh gist create .github/workflows/build.yml
+- Se genera URL: https://gist.github.com/double-thinker/39388101c93306245a4a28a8c66618d1 que se puede enviar al destinatario
+
+
+
 
 
 

@@ -27,7 +27,7 @@ jobs:             # "A JOB is a series of STEPS that constitute a process, usual
           path: jest-junit.xml # El fichero se crea en la carpeta raíz del modeltools
           reporter: java-junit # Es el formato con el que se muestra. Hay muchos. Dejamos el que se usa por defecto
 
-      - uses: devmasx/coverage-check-action@v1.2.0. # Añadimos coverage de los test de nuestro código
+      - uses: devmasx/coverage-check-action@v1.2.0 # Añadimos coverage de los test de nuestro código
         with:
           type: lcov
           result_path: coverage.lcov # Hay que tener cuidado dónde se colocan los ficheros de salida para poner el path correcto
