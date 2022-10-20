@@ -4,21 +4,20 @@ La idea es tener herramientas que no estén en sklearn a disposición de la empr
 """
 import numpy as np
 
-"""
-Devuelve todas las columnas numéricas de un DataFrame
-Entrada DataFrame
-Salida Lista con las columnas numéricas del DataFrame de entrada
-"""
+# Devuelve todas las columnas numéricas de un DataFrame.
+# Entrada DataFrame.
+# Salida Lista con las columnas numéricas del DataFrame de entrada.
 
 
-def get_numerical_features(df):
-    """get_numerical features devuelve una lista con el nombre de las columnas que contienen datos de tipo numérico
+def get_numerical_features(data_frame):
+    """get_numerical features devuelve una lista con el nombre de las columnas
+     que contienen datos de tipo numérico
 
     Parámetros
     ----------
 
-    :param df: dataframe
-    :type df: pandas.DataFrame
+    :param data_frame: dataframe
+    :type data_frame: pandas.DataFrame
     :return: Lista con el nombre de las columnas con valores numéricos
     :rtype: List[str]
 
@@ -33,14 +32,12 @@ def get_numerical_features(df):
 
     """
 
-    return list(df.select_dtypes(include=[np.number]).columns)
+    return list(data_frame.select_dtypes(include=[np.number]).columns)
 
 
-"""
-Función que suma cualquier número de valores numéricos
-Entrada números
-Salida La suma de todos los números recibidos ajusando el tipo
-"""
+# Función que suma cualquier número de valores numéricos.
+# Entrada números.
+# Salida La suma de todos los números recibidos ajusando el tipo."""
 
 
 def suma_n(*numeros):
@@ -75,20 +72,25 @@ def suma_n(*numeros):
     return suma
 
 
-"""_summary_
-Función para probar el autodocstring
-Se crea la documentación para las variables
-"""
+# This is a docstring which describes the module.
 
 
-def hola(a, b, c, d):
+def hola(a_b, b_c, c_d, d_e):
     """_summary_
 
     Args:
-        a (_type_): _description_
-        b (_type_): _description_
-        c (_type_): _description_
-        d (_type_): _description_
-    """
+        a_b (_type_): _description_
+        b_c (_type_): _description_
+        c_d (_type_): _description_
+        d_e (_type_): _description_
 
-    return 1
+    Returns:
+        _type_: _description_
+    """
+    # This is comment which describes a particular part of the module.
+    a_b = 1
+    b_c = 2
+    c_d = 3
+    d_e = 4
+
+    return a_b, b_c, c_d, d_e

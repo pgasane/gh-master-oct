@@ -10,7 +10,7 @@ pip install poetry
 
 Si os sale este error: ImportError: `pip install --upgrade pywin32==228`
 
-# Loguearnos en GitHub
+# Loguearnos en GitHub: GH AUTH LOGIN
 gh auth login
 1. GitHub.com
 2. SSH
@@ -19,8 +19,10 @@ gh auth login
 4. Title. Pulsar Enter
 5. Login with a web browser
 
-# Para comprobar GH:
+# Para comprobar GH
 gh ssh-key list
+# Para recuperar la clave pública y VOLVER A CONECTAR
+gh auth refresh -h github.com -s admin:public_key
 
 # Comandos de git
 
@@ -37,11 +39,13 @@ Crear repositorio en GH: `gh repo create`
 Ya debería funcionar. En tu página web de GitHub ya tienes un repositorio. Copia la URL en el chat.
 
 # "Commit = Cambio"
-- Creáis un fichero llamdo README.md
+- Creáis un fichero llamado README.md
 - Escribid: "Este es nuestro primer proyecto con CI/CD"
 - Guardar fichero (CTRL+S o CMD+S)
-- Escribimos git status en consola
-- `git add README.md`
+- git status
+- git add README.md
+- git dff. # Cambios no preparados para commit
+
 - git commit -m "primer commit"
 
 Si os pide esto: 
