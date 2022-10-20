@@ -1663,7 +1663,25 @@ Ruta de mi paquete: https://github.com/pgasane/gh-master-oct/releases/download/v
         - Desactivamos black en settings.json para que los errores lleguen al commit
         - Forzamos errores en el fichero preprocessing.py
         - Intentamos lanzar un commit y vemos si pre-commit lo detecta y para el commit
+            (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$ git commit -m "commit con error que detecta pre-commit"
+            [WARNING] Unstaged files detected.
+            [INFO] Stashing unstaged files to /home/jovyan/.cache/pre-commit/patch1666291160-12908.
+            black....................................................................Failed
+            - hook id: black
+            - files were modified by this hook
+
+            reformatted modeltools/preprocessing.py
+
+            All done! ✨ 🍰 ✨
+            1 file reformatted.
+
+            [INFO] Restored changes from /home/jovyan/.cache/pre-commit/patch1666291160-12908.
+            (modeltools-YGngTczd-py3.10) (base) jovyan@c86d58b943e0:~/work/m02/gh-master-oct$   
         
+        - Falla porque no se han cumplido las condiciones de black
+        - Activamos nuevamente "editor.formatOnSave": true en settings.json y repetimos el commit:
+            
+
 
 
 
